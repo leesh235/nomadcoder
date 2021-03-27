@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  },
+  "scripts": {
+    "start": "tsc-watch --onSuccess \" node dist/index.js\" "
+  },
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "tsc-watch": "^4.2.9"
+  }
+}
