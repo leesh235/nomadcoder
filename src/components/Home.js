@@ -1,3 +1,17 @@
 import React from 'react';
+import {gql} from 'apollo-boost';
+import { useQuery } from '@apollo/client';
 
-export default () => <h1>Home</h1>;
+const GET_MOVIES = gql`
+{
+    movies {
+        id
+        medium_cover_image
+    }
+}
+`;
+
+export default () => {
+    const { loading, error, data } = useQuery(GET_MOVIES);
+    return <h1>Home</h1>;
+};
