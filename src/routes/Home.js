@@ -4,11 +4,14 @@ import { useQuery } from '@apollo/client';
 import styled from "styled-components";
 import Movie from "../components/Movie";
 
+//client resolver에서 선언한 isLiked를 요청한다.
+//14번 백엔드에 추가하겠다고 알려준다.
 const GET_MOVIES = gql`
 {
     movies {
         id
         medium_cover_image
+        isLiked @client
     }
 }
 `;
@@ -62,13 +65,11 @@ export default () => {
           <Subtitle>I love GraphQL</Subtitle>
         </Header>
         {loading && <Loading>Loading...</Loading>}
-        {!loading && data.movies && (
-          <Movies>
-            {data.movies.map(m => (
-              <Movie key={m.id} id={m.id} bg={m.medium_cover_image} />
-            ))}
-          </Movies>
-        )}
+        <Movies>
+          {data?.movies?.map(m => (
+            <Movie key={m.id} id={m.id} isLiked={m.isLiked} bg={m.medium_cover_image} />
+          ))}
+        </Movies>
       </Container>
     );
   };

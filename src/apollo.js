@@ -7,7 +7,22 @@ const link = new createHttpLink({
 
 const client = new ApolloClient({
     cache: cache,
-    link: link
+    link: link,
+    //local state
+    resolvers:{
+        Movie:{
+            isLiked: () => false
+        },
+        Mutation: {
+            toggleLikeMovie: (_, {id}, {cache}) => {
+                cache.modify({id:`Movie:${id}`,
+                    fields:{
+                        isLiked: (isLiked) => !isLiked
+                    }
+                })
+            }
+        }
+    }
 })
 
 export default client;
